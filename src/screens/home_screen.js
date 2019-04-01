@@ -5,10 +5,6 @@ import SearchBar from '../components/searchbar';
 import Centered from '../components/centered';
 
 export default class HomeScreen extends React.Component {
-    static navigationOptions = {
-        title: 'TVShow'
-    };
-
     state = { search: "" }
 
     onSearch = (search) => {

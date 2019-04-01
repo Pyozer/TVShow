@@ -1,21 +1,21 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { ScrollView, Text, View, StyleSheet } from 'react-native';
+import HTML from 'react-native-render-html';
 import TVShowImage from '../components/tvshow_image';
 
 export default class TVShowDetailScreen extends React.Component {
-    static navigationOptions = {
-        title: 'Details'
-    };
-
     render() {
         const show = this.props.navigation.getParam('show', {})
         return (
-            <View style={styles.container}>
+            <ScrollView contentContainerStyle={{ padding: 16 }}>
 
                 <TVShowImage image={show.image} size={170} />
 
                 <Text style={styles.mainTitle}>{show.name}</Text>
-                <Text style={styles.summary}>{show.summary}</Text>
+                <HTML
+                    html={show.summary}
+                    tagsStyles={{ p: { textAlign: 'justify', fontSize: 17 } }}
+                />
 
                 <View style={styles.infoContainer}>
                     <View style={styles.infoContainerColumn}>
@@ -34,21 +34,17 @@ export default class TVShowDetailScreen extends React.Component {
                         <Text style={styles.text}>{show.type}</Text>
                     </View>
                 </View>
-            </View>
+            </ScrollView>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        padding: 16,
-        flex: 1,
-        flexDirection: 'column'
-    },
     mainTitle: {
         fontWeight: '500',
         fontSize: 22,
-        marginTop: 16
+        marginTop: 16,
+        marginBottom: 12
     },
     summary: {
         fontWeight: '300',
